@@ -1,10 +1,10 @@
 import { Request, Response, Router } from "express";
-import { database } from "../services/dao/database";
-import { AuthBO } from "../services/bo/AuthBO";
 import { CardBO } from "../services/bo/CardBO";
-import { generatePasswordHash } from "../utils/auth";
+import { AuthMiddleware } from "../middlewares/auth";
 
 let CardController = Router();
+
+CardController.use(AuthMiddleware)
 CardController.get("/", async (req : Request, res : Response) => {
     let userId = 1; //Number(req.userId);
     const user = await CardBO.getAllByUser(Number(userId));
@@ -16,7 +16,7 @@ CardController.get("/", async (req : Request, res : Response) => {
 CardController.get("/:id", async (req : Request, res : Response) => {
     let userId = 1; //Number(req.userId);
     let {id} = req.params; 
-    const user = await CardBO.getAllById(Number(id));
+    const user = await CardBO.getById(Number(id));
 
 
     res.json(user);
