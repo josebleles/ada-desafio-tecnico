@@ -1,5 +1,5 @@
 import 'express-async-errors';
-import './models/api/ExpressExtensions';
+import './models/RequestExtension'
 import express, { Request, Response } from 'express';
 import { controllers } from './controllers';
 import { corsMiddleware } from './middlewares/cors';
@@ -10,8 +10,8 @@ app.use(corsMiddleware);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get("/check_version",(req: Request, res : Response) =>{
-    res.json({version:process.env.VERSION});
+app.get("/",(req: Request, res : Response) =>{
+    res.json({date:new Date()});
 });
 
 app.use("/login", controllers.AuthController)
