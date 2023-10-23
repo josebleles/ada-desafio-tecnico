@@ -40,6 +40,7 @@ const Board = () => {
     const addCardHandler = lista => async (titulo, conteudo) => {
         const newCard = { lista, titulo, conteudo };
         const savedCard = await addCard(newCard);
+        console.log([savedCard, ...cards])
         setCards([savedCard, ...cards]);
     }
 
@@ -80,7 +81,7 @@ const Board = () => {
             </Lista>
             <Lista titulo={"Doing"}>
                 {
-                    cards.filter(c => c.lista === 'Doing').map(c =>
+                    cards && cards.filter(c => c.lista === 'Doing').map(c =>
                         <Card
                             key={c.id}
                             titulo={c.titulo}
@@ -94,6 +95,7 @@ const Board = () => {
                 }
             </Lista>
             <Lista titulo={"Done"}>
+                {console.log(cards)}
                 {
                     cards.filter(c => c.lista === 'Done').map(c =>
                         <Card

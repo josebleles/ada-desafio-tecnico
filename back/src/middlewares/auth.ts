@@ -8,6 +8,7 @@ export function AuthMiddleware(req: Request, res :Response, next : NextFunction)
     if(token){
       const decoded = decodeToken(token) as User;
       req.userAuth = decoded;
+      req.userId = decoded.id;
     }      
   }catch(err){
     req.userAuth = undefined;

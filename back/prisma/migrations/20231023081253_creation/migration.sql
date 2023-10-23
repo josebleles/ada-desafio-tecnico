@@ -11,9 +11,9 @@ CREATE TABLE "user" (
 -- CreateTable
 CREATE TABLE "card" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "title" TEXT NOT NULL,
-    "content" TEXT NOT NULL,
-    "list" TEXT NOT NULL,
+    "titulo" TEXT NOT NULL,
+    "conteudo" TEXT NOT NULL,
+    "lista" TEXT NOT NULL,
     "userId" INTEGER NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "modifiedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,

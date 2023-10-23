@@ -6,47 +6,49 @@ let CardController = Router();
 
 CardController.use(AuthMiddleware)
 CardController.get("/", async (req : Request, res : Response) => {
-    let userId = 1; //Number(req.userId);
-    const user = await CardBO.getAllByUser(Number(userId));
+    let userId = Number(req.userId);
+    const cards = await CardBO.getAllByUser(Number(userId));
 
 
-    res.json(user);
+    res.status(200).json(cards || []);
 })
 
 CardController.get("/:id", async (req : Request, res : Response) => {
-    let userId = 1; //Number(req.userId);
+    let userId = Number(req.userId);
     let {id} = req.params; 
-    const user = await CardBO.getById(Number(id));
+    const card = await CardBO.getById(Number(id));
 
 
-    res.json(user);
+    res.status(200).json(card);
 })
 
 CardController.post("/", async (req : Request, res : Response) => {
     let card = req.body; 
-    card.userId = 1; //Number(req.userId);
-    const user = await CardBO.insert(card);
+    card.userId = Number(req.userId);
+    const inserted = await CardBO.insert(card);
 
 
-    res.json(user);
+    res.status(201).json(inserted);
 })
 
-CardController.put("/", async (req : Request, res : Response) => {
+CardController.put("/:id", async (req : Request, res : Response) => {
     let card = req.body; 
-    card.userId = 1; //Number(req.userId);
-    const user = await CardBO.update(card);
+    card.userId = Number(req.userId);
+    card.id = Number(req.params.id);
+    const updated = await CardBO.update(card);
 
 
-    res.json(user);
+    res.status(200).json(updated);
 })
 
 CardController.delete("/:id", async (req : Request, res : Response) => {
-    let userId = 1; //Number(req.userId);
+    let userId = Number(req.userId);
     let {id} = req.params; 
-    const user = await CardBO.delete(Number(id));
+    const deleted = await CardBO.delete(Number(id));
+    const cards = await CardBO.getAllByUser(Number(userId));
 
 
-    res.json(user);
+    res.status(200).json(cards);
 })
 
 

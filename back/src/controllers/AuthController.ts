@@ -15,7 +15,8 @@ AuthController.post("/", async (req : Request, res : Response) => {
     if(!token)
         return res.sendStatus(401);
 
-    res.json({token, user});
+    // res.json({token, user});
+    res.status(200).json(token);
 })
 
 export default AuthController;

@@ -20,7 +20,7 @@ export const CardBO = {
     },
 
     async update(card : any){
-        return CardDAO.insert(card)
+        return CardDAO.update(card)
 
     },
 
